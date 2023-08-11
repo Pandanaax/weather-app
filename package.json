@@ -1,20 +1,28 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Weather APP",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Randa BALi <baliranda@gmail.com>",
   "dependencies": {
+    "@remix-run/react": "^1.19.3",
+    "axios": "^1.4.0",
+    "core-js": "^2.5.7",
     "gatsby": "^5.11.0",
     "gatsby-plugin-image": "^3.11.0",
     "gatsby-plugin-manifest": "^5.11.0",
     "gatsby-plugin-sharp": "^5.11.0",
+    "gatsby-plugin-styled-components": "^6.11.0",
     "gatsby-source-filesystem": "^5.11.0",
+    "gatsby-source-openweathermap": "^1.0.5",
     "gatsby-transformer-sharp": "^5.11.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
+    "json-loader": "^0.5.7",
     "prettier": "^2.8.8"
   },
   "keywords": [

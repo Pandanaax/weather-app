@@ -1,0 +1,21 @@
+import axios from 'axios';
+
+const GATSBY_WEATHER_API_KEY = 'fdb78bbdcd7d368bc5237da7120793c2';
+const weatherByCityNameAxios = axios.create({
+  baseURL: 'https://api.openweathermap.org/data/2.5',
+  timeout: 10000,
+});
+
+export const getWeatherByCityName = async (cityName) => {
+  try {
+    const response = await weatherByCityNameAxios.get('/weather', {
+      params: {
+        q: cityName,
+        appid: GATSBY_WEATHER_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
