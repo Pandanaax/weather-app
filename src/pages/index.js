@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
 import { getWeatherByCityName } from '../api/WeatherApi';
 import ButtonWithLoading from '../components/buttons/ButtonWithLoading';
 import Layout from '../components/Layout'; 
 import styled from 'styled-components'; 
 import WeatherWithIcon from '../components/WeatherWithIcon';
+import WeatherForecast from './WeatherForecast';
 
 const InputContainer = styled.div`
   display: flex;
@@ -13,8 +15,7 @@ const InputContainer = styled.div`
 
 const SearchParagraph = styled.p`
   font-family: verdana;
-  font-size: 20px;
-  color: darkblue;
+  font-size: 12px;
 `;
 
 const SearchInput = styled.input`
@@ -31,6 +32,27 @@ const BlockWeather = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+`;
+
+const InformationWeather = styled.div`
+  display: block;
+  width: 60%;
+  padding: 25px;
+  font-family: Helvetica, sans-serif;
+  color: rgb(181, 222, 244) !important;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+`;
+
+const TextSection = styled.div`
+  width: 100%;
+  height: 0px;
+  margin: 10px 0px;
+  opacity: 0.4;
+  border-bottom: 1px solid rgb(255, 255, 255);
 `;
 
 const HomePage = () => {
@@ -90,15 +112,21 @@ const HomePage = () => {
         </InputContainer>
       {isSearchClicked && weatherData && (
         <BlockWeather>
+          <InformationWeather>
           <h2>{weatherData.name}</h2>
           <p>{formatDate(weatherData.dt)}</p>
+          <TextSection></TextSection>
           <SearchParagraph> Temperature: {weatherData.main.temp.toFixed(2)}°C</SearchParagraph>
-          <SearchParagraph> {weatherData.main.temp_min}/{weatherData.main.temp_max}C</SearchParagraph>
           <SearchParagraph> {weatherData.weather[0].description}</SearchParagraph>
+          <TextSection></TextSection>
           <SearchParagraph> Wind: {weatherData.wind.speed} Km/h</SearchParagraph>
           <SearchParagraph> Humidity: {weatherData.main.humidity} %</SearchParagraph>
-          <WeatherWithIcon cityName={selectedCity} />
+          </InformationWeather>
+          <WeatherWithIcon cityName={selectedCity} isHome={true} iconColor="white" />
         </BlockWeather>
+      )}
+      {isSearchClicked && weatherData && (
+          <WeatherForecast city={selectedCity}/>
       )}
     </Layout>
   );

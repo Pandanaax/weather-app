@@ -19,3 +19,17 @@ export const getWeatherByCityName = async (cityName) => {
     throw error;
   }
 };
+
+export const getWeatherForecastByCityName = async (cityName) => {
+    try {
+      const response = await weatherByCityNameAxios.get('/forecast', {
+        params: {
+          q: cityName,
+          appid: GATSBY_WEATHER_API_KEY,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
