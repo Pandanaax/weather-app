@@ -3,6 +3,7 @@ import { getWeatherByCityName } from '../api/WeatherApi';
 import ButtonWithLoading from '../components/buttons/ButtonWithLoading';
 import Layout from '../components/Layout'; 
 import styled from 'styled-components'; 
+import WeatherWithIcon from '../components/WeatherWithIcon';
 
 const InputContainer = styled.div`
   display: flex;
@@ -23,6 +24,14 @@ const SearchInput = styled.input`
   margin-right: 10px;
 `;
 
+const BlockWeather = styled.div`
+  color: rgb(255, 255, 255);
+  background: linear-gradient(to right bottom, rgb(1, 129, 194), rgb(4, 167, 249), rgb(75, 196, 247));
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
 
 const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -35,7 +44,6 @@ const HomePage = () => {
     setIsSearchClicked(true);
     try {
       const data = await getWeatherByCityName(selectedCity);
-    console.log(data)
       const temperatureInCelsius = fahrenheitToCelsius(data.main.temp);
       data.main.temp = temperatureInCelsius;
       setWeatherData(data);
@@ -49,6 +57,11 @@ const HomePage = () => {
   function fahrenheitToCelsius(fahrenheit) {
     return (fahrenheit - 32) * (5 / 9);
   }
+
+  const formatDate = (timestamp) => {
+    const options = { weekday: 'short', day: 'numeric', month: 'long' };
+    return new Intl.DateTimeFormat('en-US', options).format(new Date(timestamp * 1000));
+  };
 
   useEffect(() => {
     if (selectedCity && isSearchClicked) {
@@ -76,14 +89,16 @@ const HomePage = () => {
           />
         </InputContainer>
       {isSearchClicked && weatherData && (
-        <div>
+        <BlockWeather>
           <h2>{weatherData.name}</h2>
+          <p>{formatDate(weatherData.dt)}</p>
           <SearchParagraph> Temperature: {weatherData.main.temp.toFixed(2)}°C</SearchParagraph>
           <SearchParagraph> {weatherData.main.temp_min}/{weatherData.main.temp_max}C</SearchParagraph>
           <SearchParagraph> {weatherData.weather[0].description}</SearchParagraph>
-          <SearchParagraph> Wind: {weatherData.wind.speed}</SearchParagraph>
-          <SearchParagraph> Humidity: {weatherData.main.humidity}</SearchParagraph>
-        </div>
+          <SearchParagraph> Wind: {weatherData.wind.speed} Km/h</SearchParagraph>
+          <SearchParagraph> Humidity: {weatherData.main.humidity} %</SearchParagraph>
+          <WeatherWithIcon cityName={selectedCity} />
+        </BlockWeather>
       )}
     </Layout>
   );
