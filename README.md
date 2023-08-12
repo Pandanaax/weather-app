@@ -21,8 +21,9 @@ WeatherWonders is a weather forecast application built using Gatsby.js. It allow
 1. Clone this repository: `git clone git@github.com:Pandanaax/weather-app.git`
 2. Navigate to the project directory: `cd WeatherWonders`
 3. Install dependencies: `npm install`
-4. Start the development server: `npm run develop`
-5. Open your browser and visit: `http://localhost:8000`
+4. Setup Api key in `https://openweathermap.org/api`
+5. Start the development server: `npm run develop`
+6. Open your browser and visit: `http://localhost:8000`
 
 ## Usage
 

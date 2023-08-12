@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const GATSBY_WEATHER_API_KEY = 'fdb78bbdcd7d368bc5237da7120793c2';
+const GATSBY_WEATHER_API_KEY = '';
 const weatherByCityNameAxios = axios.create({
   baseURL: 'https://api.openweathermap.org/data/2.5',
   timeout: 10000,
